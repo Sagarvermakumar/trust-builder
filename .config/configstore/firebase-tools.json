@@ -1,0 +1,40 @@
+{
+	"usage": true,
+	"motd": {
+		"cloudBuildErrorAfter": 1594252800000,
+		"cloudBuildWarnAfter": 1590019200000,
+		"defaultNode10After": 1594252800000,
+		"minVersion": "3.0.5",
+		"node8DeploysDisabledAfter": 1613390400000,
+		"node8RuntimeDisabledAfter": 1615809600000,
+		"node8WarnAfter": 1600128000000,
+		"fetched": 1685976864687
+	},
+	"analytics-uuid": "6dea1f9d-a08c-4cb1-beb9-ca7588e9941c",
+	"user": {
+		"iss": "accounts.google.com",
+		"azp": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"aud": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"sub": "108494828279767990764",
+		"email": "sksagarkumarverma@gmail.com",
+		"email_verified": true,
+		"at_hash": "cd0G1r7deqU6HUpTb2EPAw",
+		"iat": 1684002455,
+		"exp": 1684006055
+	},
+	"tokens": {
+		"expires_at": 1686049347311,
+		"refresh_token": "1//0gxJXn-w6AlgZCgYIARAAGBASNwF-L9Ir06LkUY9XfLxEaISqleDHOx_9NOvNX4RDPeF7IJI9pkx8XTRym9KZRdDFaW1jYiRxibc",
+		"scopes": [],
+		"access_token": "ya29.a0AWY7Ckkd4pUXIVXje-LlSXFA7vjhZEjW5ZK4RSFRjlRVqhW8gyxjzizK6s0QTDhYBLnNL2is-MNkTWrtxk7EQYao3H-8YfCWcEiQJgRyw8DLk87GCP0lcQ06kg6p2GY0VuyA74uEynZIb06l1elRTvKnYjp3QKTibWvcIgaCgYKARgSARISFQG1tDrpShfaWEILrA9zykIyCQAFbg0173",
+		"expires_in": 3599,
+		"scope": "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/firebase openid https://www.googleapis.com/auth/cloudplatformprojects.readonly",
+		"token_type": "Bearer",
+		"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYwODNkZDU5ODE2NzNmNjYxZmRlOWRhZTY0NmI2ZjAzODBhMDE0NWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNTYzNTg0MzM1ODY5LWZncmhnbWQ0N2JxbmVraWo1aThiNXByMDNobzg0OWU2LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNTYzNTg0MzM1ODY5LWZncmhnbWQ0N2JxbmVraWo1aThiNXByMDNobzg0OWU2LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA4NDk0ODI4Mjc5NzY3OTkwNzY0IiwiZW1haWwiOiJza3NhZ2Fya3VtYXJ2ZXJtYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InRTUmM0bDlGaDVWS21Mb0habC1IUXciLCJpYXQiOjE2ODYwNDU3NDgsImV4cCI6MTY4NjA0OTM0OH0.KhzrP5vF6FjN5q0D9lQMfUe5m0ZUha7fQmjyICssWXOpNlzMDYcbwQo0LXDPvw2E_6aU3SOXcbYIsusDF373HPsG8YUC8xmgSCxEbJhD-yKKYWjrulWAAZ0vTo-hkGjMvw8BYjGVBqBzTfFqw80iJT4sfFQbkQR1b_1BAYK_KcuFvC20qCHW56gjZ9vVPte5SV6Cfv-HSHpqH9lFuMhhZMDucaGr2ri3Z47VZ4GwEWDglhKWHwkSs1gZigIYhA-whK3Sw72Edhen3bZuikp2YnRqNBTTsx6RIAzMNk8CP-guBMiLKDJPeve4hBOyXX8SUAXnxhJumjh8MbnJNp-AeA"
+	},
+	"activeProjects": {
+		"C:\\Users\\sksag\\OneDrive\\Desktop\\Web_devlopment\\Heart_Animation\\Heart_animation": "heart-anim",
+		"C:\\Users\\sksag\\OneDrive\\Desktop\\ludogame": "ludo-game-8be48",
+		"C:\\Users\\sksag": "ludo-game-8be48"
+	}
+}
