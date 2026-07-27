@@ -1,11 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Check, ShieldCheck, Play, ArrowRight, BookOpen } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function WoodworkingLanding() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleVideoClick = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      try {
+        await video.play();
+        setIsPlaying(true);
+      } catch {
+        setIsPlaying(false);
+      }
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
 
   const projects = [
     {
@@ -90,15 +109,25 @@ export function WoodworkingLanding() {
           </p>
 
           {/* Video Container */}
-          <div className="mt-10 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-black aspect-video relative group cursor-pointer" onClick={() => setIsPlaying(true)}>
-            {!isPlaying ? (
+          <div
+            className="mt-10 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-black aspect-video relative group cursor-pointer"
+            onClick={handleVideoClick}
+          >
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              controls
+              preload="metadata"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
+            >
+              <source src="/assets/hero.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {!isPlaying && (
               <>
-                <Image
-                  src="/assets/image_1784703027994.png"
-                  alt="Ted's Woodworking Video Thumbnail"
-                  fill
-                  className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
-                />
                 <div className="absolute inset-0 bg-black/35 flex items-center justify-center transition-colors group-hover:bg-black/45">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#ea580c] hover:bg-[#d97706] text-white rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 transform group-hover:scale-110 pulse-glow">
                     <Play className="w-8 h-8 fill-current ml-1" />
@@ -106,71 +135,76 @@ export function WoodworkingLanding() {
                 </div>
                 <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md py-2.5 px-4 rounded-xl text-left border border-white/10 flex items-center justify-between">
                   <div>
-                    <p className="text-white text-sm font-semibold">Video is Playing... Click for Sound</p>
+                    <p className="text-white text-sm font-semibold">Click to play the video</p>
                     <p className="text-zinc-300 text-xs mt-0.5">Presentation by Ted McGrath, Master Woodworker</p>
                   </div>
                   <span className="bg-[#ea580c] text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider animate-pulse">Live</span>
                 </div>
               </>
-            ) : (
-              <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-6 text-center text-white">
-                <Play className="w-12 h-12 text-[#ea580c] mb-4 animate-bounce" />
-                <h3 className="text-lg font-bold">Connecting to Video Server...</h3>
-                <p className="text-sm text-zinc-400 mt-2 max-w-md">The high-speed woodworking tutorial stream is initializing. Please verify your connection details to load the 16,000 plans stream.</p>
-                <button
-                  onClick={(e) => { e.stopPropagation(); setIsPlaying(false); }}
-                  className="mt-6 text-xs text-[#ea580c] hover:underline font-semibold"
-                >
-                  Go Back to Preview
-                </button>
-              </div>
             )}
           </div>
 
           {/* CTA Button */}
-          <div className="mt-10">
-            <button className="bg-[#ea580c] hover:bg-[#d97706] text-white font-extrabold text-lg sm:text-xl py-4 sm:py-5 px-8 sm:px-12 rounded-2xl shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl flex items-center justify-center gap-3 mx-auto pulse-glow">
-              Get Instant Access to 16,000 Plans <ArrowRight className="w-5.5 h-5.5" />
-            </button>
-            <p className="text-xs text-zinc-500 mt-3 flex items-center justify-center gap-1.5 font-medium">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" /> 60-Day Money Back Guarantee • Secure 256-bit SSL Encryption
-            </p>
-          </div>
+              <div className="pt-4">
+                <a
+                  href="https://49b84jmcpbim8zwimyvor6vnc9.hop.clickbank.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex bg-[#ea580c] hover:bg-[#d97706] text-white font-extrabold text-lg sm:text-xl py-4 sm:py-5 px-8 sm:px-12 rounded-2xl shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl items-center justify-center gap-3 w-full sm:w-auto pulse-glow"
+                >
+                  Download All 16,000 Plans Now <ArrowRight className="w-5.5 h-5.5" />
+                </a>
+              </div>
         </section>
 
         {/* Introduction / Letter Section */}
         <section className="bg-white border-y border-zinc-100 py-16 px-4">
-          <div className="max-w-3xl mx-auto">
-            {/* Header of Letter */}
-            <div className="flex flex-col sm:flex-row items-center gap-6 pb-8 border-b border-zinc-100">
-              <Image
-                src="/assets/image_1784703095594.png"
-                alt="Ted Woody McGrath"
-                width={96}
-                height={96}
-                className="rounded-full object-cover border-4 border-[#faf8f5] shadow-md"
-              />
-              <div className="text-center sm:text-left">
-                <h3 className="font-serif text-xl font-extrabold text-[#2c241e]">From The Desk Of Ted McGrath</h3>
-                <p className="text-sm text-zinc-500 font-semibold mt-1">Master Woodworker, Educator, Member of AWI</p>
-                <p className="text-xs italic text-[#ea580c] font-bold mt-0.5">Re: The real reason your projects don&apos;t turn out the way you picture them...</p>
+          <div className="max-w-7xl mx-auto">
+            {/* Header of Letter (two-column grid) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-8 border-b border-zinc-100">
+              {/* Left: show uploaded image at its natural size */}
+              <div className="lg:col-span-6 flex justify-start">
+                <div className="overflow-hidden rounded-md border-4 border-[#faf8f5] shadow-md max-w-full">
+                  <Image
+                    src="/assets/generated_images/image5.png"
+                    alt="Ted Woody McGrath"
+                    width={1365}
+                    height={360}
+                    className="w-auto h-auto block"
+                  />
+                </div>
+              </div>
+
+              {/* Right: heading + intro copy + letter content */}
+              <div className="lg:col-span-6">
+                <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#2c241e]">From The Desk Of Ted McGrath</h3>
+                <p className="text-xs italic text-[#ea580c] font-bold mt-2">Re: The real reason your projects don&apos;t turn out the way you picture them...</p>
+
+                {/* Letter Content (greeting + highlighted quote) */}
+                <div className="mt-6 prose prose-zinc max-w-none text-base sm:text-lg text-zinc-700 space-y-6 leading-relaxed">
+                  <p className="font-semibold text-[#2c241e]">Dear Fellow Woodworker,</p>
+                  <p>
+                    You already know what you want to build. You can picture it perfectly in your mind.
+                  </p>
+                  <p className="bg-[#fffbeb] border-l-4 border-amber-500 p-4 rounded-r-lg font-medium text-amber-900">
+                    &ldquo;The deck out back. The dining table your family actually gathers around. The workbench that finally gets your garage under control.&rdquo;
+                  </p>
+                </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Letter Content */}
-            <div className="mt-8 prose prose-zinc max-w-none text-base sm:text-lg text-zinc-700 space-y-6 leading-relaxed">
-              <p className="font-semibold text-[#2c241e]">Dear Fellow Woodworker,</p>
-              <p>
-                You already know what you want to build. You can picture it perfectly in your mind.
-              </p>
-              <p className="bg-[#fffbeb] border-l-4 border-amber-500 p-4 rounded-r-lg font-medium text-amber-900">
-                &ldquo;The deck out back. The dining table your family actually gathers around. The workbench that finally gets your garage under control.&rdquo;
-              </p>
+        {/* Problem + Solution Section (full-width content moved here) */}
+        <section className="py-12 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#2c241e] mb-6">Why Plans Fail — And The Fix</h3>
+            <div className="text-zinc-700 space-y-6 text-base sm:text-lg">
               <p>
                 But the moment you start building, reality sets in. The instructions you downloaded are missing steps. The diagrams don&apos;t match the dimensions. You buy extra wood because of a bad measurement sheet. You blame yourself for failing.
               </p>
               <p>
-                Here&apos;s the truth: <span className="font-bold text-[#2c241e]">It&apos;s not your fault.</span> Most plans are written by people who shouldn&apos;t be teaching. They skip over critical details, assuming you know exactly what to do.
+                Here&apos;s the truth: <strong>It&apos;s not your fault.</strong> Most plans are written by people who shouldn&apos;t be teaching. They skip over critical details, assuming you know exactly what to do.
               </p>
               <p>
                 That is why I spent years putting together a massive library of 16,000+ step-by-step woodworking plans. Every single plan is built, tested, and contains everything you need to get the job done right the first time.
@@ -194,7 +228,13 @@ export function WoodworkingLanding() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-zinc-100 transition-all duration-300 transform hover:-translate-y-1 group">
+              <a
+                key={index}
+                href="https://49b84jmcpbim8zwimyvor6vnc9.hop.clickbank.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-zinc-100 transition-all duration-300 transform hover:-translate-y-1 group"
+              >
                 <div className="h-56 overflow-hidden relative">
                   <Image
                     src={project.image}
@@ -225,26 +265,26 @@ export function WoodworkingLanding() {
                   </p>
                   <div className="mt-5 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-400 font-semibold uppercase tracking-wider">
                     <span className="flex items-center gap-1"><BookOpen className="w-3.5 h-3.5" /> Full Blueprints</span>
-                    <span className="flex items-center gap-1 text-[#ea580c] group-hover:underline cursor-pointer">View Details <ArrowRight className="w-3 h-3" /></span>
+                    <span className="flex items-center gap-1 text-[#ea580c] group-hover:underline">View Details <ArrowRight className="w-3 h-3" /></span>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </section>
 
         {/* Product Box Section */}
         <section className="bg-[#f0ede6] py-16 px-4 border-t border-b border-zinc-200">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left: Product Box Mockup Image */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white max-w-sm">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white max-w-xl">
                 <Image
-                  src="/assets/image_1784703150512.png"
-                  alt="Ted's Woodworking Pack Mockup"
-                  width={400}
-                  height={400}
+                  src="/assets/image_b.png"
+                  alt="Ted&apos;s Woodworking Pack Mockup"
+                  width={500}
+                  height={800}
                   className="w-full h-auto object-contain"
                 />
               </div>
@@ -253,21 +293,24 @@ export function WoodworkingLanding() {
             {/* Right: Copy list */}
             <div className="lg:col-span-7 space-y-6">
               <span className="bg-[#ea580c] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Best Value Offer</span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-[#2c241e] leading-tight">
-                16,000+ Woodworking Plans. <br />
-                <span className="text-[#ea580c]">Ready to Download.</span>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2c241e] leading-tight">
+                Build Faster. <br />
+                <span className="text-[#ea580c]">Create Better.</span>
               </h2>
-              <p className="text-zinc-600 leading-relaxed text-base sm:text-lg">
-                This is the largest collection of woodworking plans available anywhere. Get lifetime access to 16,000 blueprints, complete shopping lists, and detailed guides.
+              <p className="text-zinc-600 leading-relaxed text-base sm:text-lg max-w-2xl">
+                Stop wasting time on confusing instructions and missing details. With this massive plan library, you get everything needed to turn your ideas into finished projects with confidence.
+              </p>
+              <p className="text-sm sm:text-base text-zinc-500 font-medium leading-relaxed max-w-2xl">
+                From simple beginner builds to advanced custom furniture, each plan is designed to help you save money, reduce mistakes, and finish projects the right way.
               </p>
 
               <ul className="space-y-3.5">
                 {[
-                  "Detailed schematics with multi-angle exploded views",
-                  "Complete materials lists (tells you exactly what to buy)",
-                  "Step-by-step assembly guides suitable for beginners",
-                  "3D drawings to visualize the final product",
-                  "Includes plans for furniture, sheds, cabins, toys, and more",
+                  "16,000+ detailed woodworking plans for furniture, sheds, cabins, decks, and more",
+                  "Complete shopping lists and exact material measurements for every project",
+                  "Step-by-step blueprints that make even beginner builds much easier",
+                  "Multi-angle views and 3D layouts so you can visualize the final result clearly",
+                  "Lifetime access to a growing library of practical, proven designs",
                 ].map((bullet, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-zinc-700 font-medium">
                     <span className="bg-emerald-500 text-white rounded-full p-0.5 mt-1 flex-shrink-0">
@@ -280,6 +323,7 @@ export function WoodworkingLanding() {
 
               <div className="pt-4">
                 <button className="bg-[#ea580c] hover:bg-[#d97706] text-white font-extrabold text-lg sm:text-xl py-4 sm:py-5 px-8 sm:px-12 rounded-2xl shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl flex items-center justify-center gap-3 w-full sm:w-auto pulse-glow">
+                <a href="https://49b84jmcpbim8zwimyvor6vnc9.hop.clickbank.net" target="_blank" rel="noopener noreferrer"></a>
                   Download All 16,000 Plans Now <ArrowRight className="w-5.5 h-5.5" />
                 </button>
               </div>
@@ -292,17 +336,27 @@ export function WoodworkingLanding() {
 
       {/* Footer */}
       <footer className="bg-[#2c241e] text-zinc-400 py-12 px-4 border-t border-[#1a1411]">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
           <p className="font-serif italic text-lg font-bold tracking-tight text-white select-none">
             Ted&apos;s<span className="text-[#ea580c]">Woodworking</span>
           </p>
-          <p className="text-xs max-w-2xl mx-auto leading-relaxed text-zinc-500">
-            ClickBank is the retailer of products on this site. CLICKBANK® is a registered trademark of Click Sales, Inc., a Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by permission. ClickBank&apos;s role as retailer does not constitute an endorsement, approval or review of these products or any claim, statement or opinion used in promotion of these products.
-          </p>
+
+          <div className="text-left text-xs text-zinc-300 max-w-5xl mx-autoPrivacy Policy  p-4 rounded-md">
+            <h4 className="font-semibold text-white mb-2">Disclaimer &amp; FTC Disclosure</h4>
+            <p className="mb-2"><strong>Affiliate Disclosure:</strong><br />
+            The Woodworking Blueprint is a professional review and promotional website. This site contains affiliate links, which means the owner may receive a commission if you decide to purchase the product recommended through the link provided (at no additional cost to you). We only recommend high-quality woodworking blueprints and guides that we believe will add genuine value to your projects.</p>
+
+            <p className="mb-2"><strong>Earnings &amp; Results Disclaimer:</strong><br />
+            Every effort has been made to accurately represent this product and its potential. Please remember that woodworking success depends on individual effort, skill level, time commitment, and proper tool usage. There is no guarantee that you will achieve the exact same results shown in the testimonials, as individual experiences vary.</p>
+
+            <p className="mb-0"><strong>ClickBank Disclaimer:</strong><br />
+            ClickBank is the retailer of products on this site. CLICKBANK® is a registered trademark of Click Sales, Inc., a Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by permission. ClickBank&apos;s role as retailer does not constitute an endorsement, approval or review of these products or any claim, statement or opinion used in promotion of these products.</p>
+          </div>
+
           <div className="flex justify-center gap-4 text-xs font-semibold text-zinc-500">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <span>•</span>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             <span>•</span>
             <a href="#" className="hover:text-white transition-colors">Contact Support</a>
           </div>
@@ -311,6 +365,8 @@ export function WoodworkingLanding() {
           </p>
         </div>
       </footer>
+
+      
     </div>
   );
 }
